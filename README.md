@@ -6,7 +6,10 @@
 
 ```yml
 environment:
-      QUEUE_REFRESH_SQS_URL: ${param:sqsEndPoint, self:custom.sqsEndPoint}
+      QUEUE_REFRESH_SQS_URL:
+        Fn::GetAtt:
+          - SqsQueueRefresh
+          - QueueUrl
 ```
 - In the `serverless.yml` file, we are using the AWS intrinsic function to assign the `QUEUE_REFRESH_SQS_URL` environment variable. However, please note that this variable will not be resolved in a local setup (as per the official documentation).
 ![We](https://raw.githubusercontent.com/kishor2108/common/master/unresolved_attr.png)
